@@ -1,0 +1,24 @@
+{
+  "name": "Scramble text",
+  "category": "text",
+  "description": "Characters cycle through random glyphs and settle into the real text, left to right.",
+  "export": "scrambleText",
+  "component": "ScrambleText",
+  "budget": 2048,
+  "options": {
+    "duration": {
+      "type": "number",
+      "default": 1200,
+      "min": 300,
+      "max": 4000,
+      "step": 100,
+      "label": "Duration"
+    },
+    "trigger": {
+      "type": "select",
+      "default": "view",
+      "values": ["load", "view", "hover"],
+      "label": "Trigger"
+    }
+  }
+}

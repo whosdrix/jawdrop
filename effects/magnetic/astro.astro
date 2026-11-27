@@ -1,0 +1,16 @@
+---
+import type { MagneticOptions } from './core'
+
+type Props = Omit<MagneticOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'div', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="magnetic" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { magnetic } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="magnetic"]')) {
+    magnetic(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

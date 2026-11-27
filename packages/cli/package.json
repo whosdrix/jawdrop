@@ -1,0 +1,40 @@
+{
+  "name": "jawdrop",
+  "version": "0.0.0",
+  "description": "Add jawdrop effects to your project: copy-paste text, scroll, cursor and shader effects for React, Astro and plain HTML.",
+  "license": "MIT",
+  "author": "whosdrix",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whosdrix/jawdrop.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/whosdrix/jawdrop#readme",
+  "bugs": "https://github.com/whosdrix/jawdrop/issues",
+  "keywords": [
+    "effects",
+    "animation",
+    "webgl",
+    "shaders",
+    "scroll-animation",
+    "text-effects",
+    "react",
+    "astro",
+    "shadcn",
+    "cli"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "jawdrop": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "registry.json"
+  ],
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --target=node20 --outfile=dist/index.js --banner:js='#!/usr/bin/env node'"
+  }
+}

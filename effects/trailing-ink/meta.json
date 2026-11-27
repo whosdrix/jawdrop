@@ -1,0 +1,31 @@
+{
+  "name": "Trailing ink",
+  "category": "cursor",
+  "description": "The cursor leaves a smooth ink stroke that thins out and fades behind it.",
+  "export": "trailingInk",
+  "component": "TrailingInk",
+  "budget": 2048,
+  "options": {
+    "color": {
+      "type": "color",
+      "default": "#7aa2ff",
+      "label": "Color"
+    },
+    "width": {
+      "type": "number",
+      "default": 14,
+      "min": 2,
+      "max": 40,
+      "step": 1,
+      "label": "Width"
+    },
+    "life": {
+      "type": "number",
+      "default": 600,
+      "min": 100,
+      "max": 2000,
+      "step": 50,
+      "label": "Trail length"
+    }
+  }
+}

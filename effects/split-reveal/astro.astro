@@ -1,0 +1,16 @@
+---
+import type { SplitRevealOptions } from './core'
+
+type Props = Omit<SplitRevealOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'span', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="split-reveal" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { splitReveal } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="split-reveal"]')) {
+    splitReveal(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

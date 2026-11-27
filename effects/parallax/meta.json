@@ -1,0 +1,23 @@
+{
+  "name": "Parallax depth",
+  "category": "scroll",
+  "description": "Layers move at their own speed with scroll and pointer, set per layer with a data-depth attribute.",
+  "export": "parallax",
+  "component": "Parallax",
+  "budget": 2048,
+  "options": {
+    "distance": {
+      "type": "number",
+      "default": 120,
+      "min": 10,
+      "max": 400,
+      "step": 10,
+      "label": "Distance"
+    },
+    "pointer": {
+      "type": "boolean",
+      "default": true,
+      "label": "Follow pointer"
+    }
+  }
+}

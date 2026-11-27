@@ -1,0 +1,26 @@
+{
+  "name": "Aurora",
+  "category": "backgrounds",
+  "description": "Curtains of light ripple across a transparent canvas, so it sits on top of any background.",
+  "export": "aurora",
+  "component": "Aurora",
+  "budget": 3072,
+  "options": {
+    "speed": {
+      "type": "number",
+      "default": 1,
+      "min": 0.1,
+      "max": 4,
+      "step": 0.1,
+      "label": "Speed"
+    },
+    "intensity": {
+      "type": "number",
+      "default": 1,
+      "min": 0.2,
+      "max": 2,
+      "step": 0.1,
+      "label": "Intensity"
+    }
+  }
+}

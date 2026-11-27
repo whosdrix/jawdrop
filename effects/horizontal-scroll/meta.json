@@ -1,0 +1,18 @@
+{
+  "name": "Horizontal scroll",
+  "category": "scroll",
+  "description": "The section pins while vertical scrolling slides a row of panels sideways. Falls back to a normal swipeable row.",
+  "export": "horizontalScroll",
+  "component": "HorizontalScroll",
+  "budget": 2048,
+  "options": {
+    "top": {
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "label": "Top"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run registry
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run size
+      - run: npm run build
+      - name: CLI smoke test
+        run: |
+          mkdir -p /tmp/app && cd /tmp/app
+          echo '{"dependencies":{"react":"19"}}' > package.json
+          node $GITHUB_WORKSPACE/packages/cli/dist/index.js add scramble-text magnetic
+          test -f components/jawdrop/ScrambleText.tsx
+          test -f components/jawdrop/lib.ts
+
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npx playwright test --trace off
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report

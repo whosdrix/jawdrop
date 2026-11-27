@@ -1,0 +1,45 @@
+# jawdrop
+
+> Open-source library of copy-paste web effects in plain TypeScript. Zero dependencies, each effect is one file under 3 KB gzipped. You install the source into your own project; there is no runtime package.
+
+Every effect is a function `fn(el, options)` that returns a `destroy()` function. All of them respect `prefers-reduced-motion`, pause when off-screen, and undo their DOM and style changes on destroy. React and Astro wrappers are available for each.
+
+## Install
+
+- CLI: `npx jawdrop add <slug>` (for example `npx jawdrop add scramble-text`)
+- shadcn: `npx shadcn@latest add https://whosdrix.github.io/jawdrop/r/<slug>.json`
+- Registry index: https://whosdrix.github.io/jawdrop/r/registry.json
+
+## Text
+
+- scramble-text: characters cycle through random glyphs and settle into the real text, left to right.
+- split-reveal: words or letters rise out of a mask, one after another, when the text scrolls into view.
+- gradient-sweep: a gradient slides through the letters on a loop.
+- marquee: an endless row that speeds up and flips direction with scroll, and eases to a stop on hover.
+
+## Backgrounds
+
+- gradient-mesh: four colors drift and blend in a WebGL shader, with grain so it never bands.
+- aurora: curtains of light on a transparent WebGL canvas that sits over any background.
+- grain: a flickering film grain overlay.
+- dot-grid: a canvas grid of dots that swell, glow and spring away from the cursor.
+
+## Scroll
+
+- stacking-cards: cards pin on top of each other while the ones underneath shrink and dim.
+- parallax: layers move at their own speed with scroll and pointer, set with `data-depth`.
+- draw-path: SVG strokes draw themselves as they travel through the viewport.
+- horizontal-scroll: the section pins while vertical scrolling slides a row of panels sideways.
+
+## Cursor
+
+- magnetic: the element leans toward the cursor and springs back.
+- spotlight: a soft light follows the cursor across a card and catches its border.
+- tilt-card: a card tilts in 3D toward the cursor, with a moving glare.
+- trailing-ink: the cursor leaves an ink stroke that thins out and fades.
+
+## Links
+
+- Demo and playground: https://whosdrix.github.io/jawdrop/
+- Source: https://github.com/whosdrix/jawdrop
+- License: MIT

@@ -1,0 +1,28 @@
+{
+  "name": "Spotlight card",
+  "category": "cursor",
+  "description": "A soft light follows the cursor across a card and catches its border.",
+  "export": "spotlight",
+  "component": "Spotlight",
+  "budget": 2048,
+  "options": {
+    "size": {
+      "type": "number",
+      "default": 420,
+      "min": 100,
+      "max": 900,
+      "step": 10,
+      "label": "Size"
+    },
+    "color": {
+      "type": "color",
+      "default": "#7aa2ff",
+      "label": "Color"
+    },
+    "border": {
+      "type": "boolean",
+      "default": true,
+      "label": "Light the border"
+    }
+  }
+}

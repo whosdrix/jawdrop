@@ -1,0 +1,16 @@
+name: Effect request
+description: Suggest an effect for the collection
+labels: [effect request]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What should it do?
+      description: A link to a site or a clip where you saw it is perfect.
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options: [Text, Backgrounds, Scroll, Cursor, Other]

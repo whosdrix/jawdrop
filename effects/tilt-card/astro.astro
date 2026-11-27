@@ -1,0 +1,16 @@
+---
+import type { TiltCardOptions } from './core'
+
+type Props = Omit<TiltCardOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'div', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="tilt-card" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { tiltCard } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="tilt-card"]')) {
+    tiltCard(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

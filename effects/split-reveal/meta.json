@@ -1,0 +1,37 @@
+{
+  "name": "Split reveal",
+  "category": "text",
+  "description": "Words or letters rise out of a mask, one after another, when the text scrolls into view.",
+  "export": "splitReveal",
+  "component": "SplitReveal",
+  "budget": 2048,
+  "options": {
+    "by": {
+      "type": "select",
+      "default": "word",
+      "values": ["word", "char"],
+      "label": "Split by"
+    },
+    "stagger": {
+      "type": "number",
+      "default": 60,
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "label": "Stagger"
+    },
+    "duration": {
+      "type": "number",
+      "default": 900,
+      "min": 200,
+      "max": 2000,
+      "step": 50,
+      "label": "Duration"
+    },
+    "repeat": {
+      "type": "boolean",
+      "default": true,
+      "label": "Replay on scroll"
+    }
+  }
+}

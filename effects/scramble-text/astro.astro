@@ -1,0 +1,16 @@
+---
+import type { ScrambleTextOptions } from './core'
+
+type Props = Omit<ScrambleTextOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'span', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="scramble-text" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { scrambleText } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="scramble-text"]')) {
+    scrambleText(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

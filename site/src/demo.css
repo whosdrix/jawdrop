@@ -1,0 +1,346 @@
+/* Styles for the markup in effects/<slug>/demo.html.
+   Everything is sized in container units so a demo looks the same in a card and full size. */
+.stage > * {
+  font-family: var(--display);
+}
+.demo-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 6cqw;
+}
+.demo-fill {
+  position: absolute;
+  inset: 0;
+}
+.demo-over {
+  position: absolute;
+  left: 5cqw;
+  bottom: 5cqw;
+  margin: 0;
+  font-weight: 600;
+  font-size: 7.2cqw;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: #fff;
+  pointer-events: none;
+}
+.stage-lg .demo-over {
+  bottom: 9cqw;
+}
+.demo-quiet {
+  color: rgba(237, 235, 229, 0.28);
+}
+
+/* text */
+.demo-scramble {
+  margin: 0;
+  font: 500 4.5cqw / 1.2 var(--mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--text);
+}
+.demo-scramble::before {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.6em;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: 0.1em;
+}
+.demo-headline {
+  margin: 0;
+  max-width: 82cqw;
+  font-weight: 600;
+  font-size: 10.5cqw;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  text-align: left;
+}
+.demo-chroma {
+  margin: 0;
+  font-weight: 700;
+  font-size: 19cqw;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+.demo-center:has(.demo-marquee) {
+  padding-inline: 0;
+}
+.demo-marquee {
+  width: 100%;
+  font-weight: 700;
+  font-size: 13cqw;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+.demo-marquee span {
+  flex: none;
+}
+.demo-marquee i {
+  flex: none;
+  margin-inline: 0.45em;
+  font-style: normal;
+  font-size: 0.4em;
+  color: var(--accent);
+}
+.demo-marquee div {
+  align-items: center;
+}
+.demo-outline {
+  color: rgba(237, 235, 229, 0.28);
+}
+
+/* backgrounds */
+.demo-night {
+  background:
+    radial-gradient(1px 1px at 12% 18%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 31% 9%, #cfd8ff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 47% 22%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 63% 12%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 78% 27%, #cfd8ff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 88% 8%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 22% 34%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 56% 38%, #fff 50%, transparent 51%),
+    linear-gradient(#03040a, #070b1c 70%, #0b1226);
+}
+.demo-night .demo-over,
+.demo-sunset .demo-over {
+  font: 500 3.1cqw / 1.5 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.demo-sunset {
+  background: linear-gradient(160deg, #1b1145 0%, #7a1f5c 38%, #e2533a 68%, #f6b352 100%);
+}
+.demo-sunset::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 34cqw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(#ffe9b0, #ff8a4c);
+  box-shadow: 0 0 12cqw rgba(255, 170, 90, 0.55);
+}
+.demo-paper {
+  background:
+    linear-gradient(rgba(237, 235, 229, 0.16), rgba(237, 235, 229, 0.16)) 5cqw 78% / 60cqw 1px
+    no-repeat,
+    var(--bg-2);
+}
+.demo-paper .demo-over {
+  bottom: 24%;
+  font: italic 400 8cqw / 1 var(--serif);
+  letter-spacing: -0.01em;
+}
+.stage-lg .demo-paper .demo-over {
+  bottom: 24%;
+}
+
+/* scroll */
+.demo-scroll {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-2) transparent;
+}
+.stage-lg .demo-scroll {
+  overflow-y: auto;
+}
+.demo-stack {
+  padding: 0 6cqw 6cqh;
+}
+.demo-stack article,
+.demo-row article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4cqw;
+  border-radius: 3cqw;
+  background: var(--c);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 11cqw;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+}
+.demo-stack article b,
+.demo-row article b {
+  font: 500 2.8cqw / 1 var(--mono);
+  letter-spacing: 0.06em;
+}
+.demo-stack article {
+  height: 68cqh;
+  margin-bottom: 8cqh;
+  box-shadow: 0 -1cqh 4cqh rgba(0, 0, 0, 0.35);
+}
+.demo-stack article:first-child {
+  margin-top: 24px;
+}
+.demo-spacer {
+  height: 30cqh;
+}
+.demo-spacer-sm {
+  height: 15cqh;
+}
+.demo-row {
+  gap: 3cqw;
+  padding-inline: 6cqw;
+}
+.demo-row article {
+  flex: none;
+  width: 54cqw;
+  height: 70cqh;
+  font-size: 9cqw;
+}
+.demo-gap {
+  height: 100cqh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+.demo-gap p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 7.5cqw;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+.demo-gap p::after {
+  content: "↓";
+  display: block;
+  margin-top: 0.5em;
+  font-weight: 400;
+  color: var(--accent);
+}
+.demo-svg {
+  height: 70cqh;
+  padding-inline: 8cqw;
+}
+.demo-svg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.demo-parallax {
+  overflow: hidden;
+}
+.demo-orb {
+  position: absolute;
+  border-radius: 50%;
+}
+.demo-orb-a {
+  width: 58cqw;
+  aspect-ratio: 1;
+  left: -8cqw;
+  top: -6cqw;
+  background: radial-gradient(circle at 35% 30%, #5b8cff, #1a2a78 55%, transparent 72%);
+  filter: blur(1.2cqw);
+  opacity: 0.9;
+}
+.demo-orb-b {
+  width: 30cqw;
+  aspect-ratio: 1;
+  right: 8cqw;
+  top: 12cqw;
+  border: 1px solid rgba(237, 235, 229, 0.55);
+}
+.demo-orb-c {
+  width: 9cqw;
+  aspect-ratio: 1;
+  right: 20cqw;
+  bottom: 8cqw;
+  background: #ff5c39;
+  box-shadow: 0 2cqw 5cqw rgba(255, 92, 57, 0.45);
+}
+.demo-depth {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  margin: -0.5em 0 0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 22cqw;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--text);
+}
+
+/* cursor */
+.demo-button {
+  padding: 0 2.2em;
+  height: 3.3em;
+  border-radius: 99px;
+  background: var(--text);
+  color: #0a0b0f;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(15px, 4cqw, 24px);
+  letter-spacing: -0.02em;
+  will-change: transform;
+}
+.demo-button span {
+  display: inline-block;
+}
+.demo-card {
+  width: 62cqw;
+  min-height: 62cqh;
+  padding: 5cqw;
+  border-radius: 3.4cqw;
+  background: #0f1117;
+  box-shadow: inset 0 0 0 1px rgba(237, 235, 229, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.6cqw;
+  justify-content: flex-end;
+}
+.demo-card small {
+  font: 500 2.6cqw / 1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: auto;
+}
+.demo-card strong {
+  font-weight: 600;
+  font-size: 8cqw;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+.demo-card span {
+  font-size: clamp(12px, 3.2cqw, 18px);
+  line-height: 1.4;
+  color: var(--muted);
+  max-width: 30ch;
+}
+.demo-holo {
+  width: 44cqw;
+  min-height: 74cqh;
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(255, 92, 57, 0.9), transparent 55%),
+    radial-gradient(100% 90% at 0% 100%, #5b8cff, transparent 60%), #141a3a;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 4cqw 8cqw rgba(0, 0, 0, 0.5);
+}
+.demo-holo small,
+.demo-holo span {
+  color: rgba(255, 255, 255, 0.8);
+}
+.demo-holo strong {
+  font-size: 13cqw;
+  font-weight: 700;
+}

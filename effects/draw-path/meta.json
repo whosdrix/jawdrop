@@ -1,0 +1,26 @@
+{
+  "name": "Scroll-drawn path",
+  "category": "scroll",
+  "description": "SVG strokes draw themselves as they travel through the viewport, tied to scroll position.",
+  "export": "drawPath",
+  "component": "DrawPath",
+  "budget": 2048,
+  "options": {
+    "start": {
+      "type": "number",
+      "default": 0.9,
+      "min": 0,
+      "max": 1,
+      "step": 0.05,
+      "label": "Start"
+    },
+    "end": {
+      "type": "number",
+      "default": 0.35,
+      "min": 0,
+      "max": 1,
+      "step": 0.05,
+      "label": "End"
+    }
+  }
+}

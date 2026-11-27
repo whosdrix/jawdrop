@@ -1,0 +1,16 @@
+---
+import type { GrainOptions } from './core'
+
+type Props = Omit<GrainOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'div', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="grain" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { grain } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="grain"]')) {
+    grain(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

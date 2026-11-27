@@ -1,0 +1,28 @@
+{
+  "name": "Kinetic marquee",
+  "category": "text",
+  "description": "An endless row that speeds up and changes direction as you scroll, and eases to a stop on hover.",
+  "export": "marquee",
+  "component": "Marquee",
+  "budget": 2048,
+  "options": {
+    "speed": {
+      "type": "number",
+      "default": 80,
+      "min": 10,
+      "max": 400,
+      "step": 10,
+      "label": "Speed"
+    },
+    "scrollBoost": {
+      "type": "boolean",
+      "default": true,
+      "label": "Scroll boost"
+    },
+    "pauseOnHover": {
+      "type": "boolean",
+      "default": true,
+      "label": "Pause on hover"
+    }
+  }
+}

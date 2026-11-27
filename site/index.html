@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>jawdrop: copy-paste web effects</title>
+    <meta
+      name="description"
+      content="16 text, background, scroll and cursor effects in plain TypeScript. Zero dependencies, under 3 KB each. One command copies the source into your project."
+    />
+    <meta name="theme-color" content="#08090c" />
+    <meta property="og:title" content="jawdrop: copy-paste web effects" />
+    <meta
+      property="og:description"
+      content="16 effects in plain TypeScript. Zero dependencies, under 3 KB each, yours after one command."
+    />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <script>
+      try {
+        var m = localStorage.getItem('jawdrop:motion')
+        if (m === 'reduce' || m === 'full') document.documentElement.dataset.motion = m
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#effects">Skip to effects</a>
+
+    <header class="nav">
+      <a class="wordmark" href="#" aria-label="jawdrop home">jawdr<span>o</span>p</a>
+      <nav aria-label="Main">
+        <a href="#effects">Effects</a>
+        <a href="https://github.com/whosdrix/jawdrop" rel="noreferrer">GitHub</a>
+        <button type="button" class="motion" data-motion-toggle aria-pressed="false">
+          <span class="motion-dot" aria-hidden="true"></span>
+          <span data-motion-label>Motion on</span>
+        </button>
+      </nav>
+    </header>
+
+    <main id="home" data-home>
+      <section class="hero" data-hero>
+        <div class="hero-sky" data-hero-sky aria-hidden="true"></div>
+        <div class="wrap hero-inner">
+          <p class="eyebrow" data-hero-eyebrow>16 effects / 0 dependencies / MIT</p>
+          <h1 class="hero-title">
+            <span class="line" data-hero-line>Web effects</span>
+            <span class="line" data-hero-line>that make people</span>
+            <em class="line" data-hero-sweep>stop scrolling.</em>
+          </h1>
+          <div class="hero-foot">
+            <p class="hero-sub">
+              Text, backgrounds, scroll and cursor effects in plain TypeScript. Each one is a single
+              file under 3&nbsp;KB, and after one command it lives in your repo, not in
+              node_modules.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-solid" href="#effects" data-magnetic><span>Browse effects</span></a>
+              <a
+                class="btn btn-ghost"
+                href="https://github.com/whosdrix/jawdrop"
+                rel="noreferrer"
+                data-magnetic
+                ><span>GitHub</span></a
+              >
+            </div>
+            <button type="button" class="cmd cmd-hero" data-copy="npx jawdrop add aurora">
+              <code><i>$</i> npx jawdrop add aurora</code><span class="cmd-copy">Copy</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div class="ticker" data-ticker aria-hidden="true"></div>
+
+      <section class="why wrap" aria-labelledby="why-title">
+        <h2 id="why-title" class="why-title">Small enough to read before you paste it.</h2>
+        <ul class="why-grid">
+          <li>
+            <b>0</b>
+            <h3>Dependencies</h3>
+            <p>Plain TypeScript and browser APIs. Nothing to audit, nothing to bump.</p>
+          </li>
+          <li>
+            <b>&lt;3<small>KB</small></b>
+            <h3>Each, gzipped</h3>
+            <p>The heaviest one is a WebGL shader. Most of them are under 1&nbsp;KB.</p>
+          </li>
+          <li>
+            <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" /></svg></b>
+            <h3>Respects reduced motion</h3>
+            <p>Every effect settles into a still frame when asked. Try the toggle up top.</p>
+          </li>
+          <li>
+            <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9M4 4v4.5h4.5" /></svg></b>
+            <h3>Cleans up after itself</h3>
+            <p>Each call returns a destroy function. Listeners, canvases and inline styles all go.</p>
+          </li>
+          <li>
+            <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5v14M16 5v14" /></svg></b>
+            <h3>Pauses off-screen</h3>
+            <p>Loops stop when the element leaves the viewport or the tab is hidden.</p>
+          </li>
+        </ul>
+      </section>
+
+      <div id="effects" class="gallery wrap" data-gallery></div>
+
+      <section class="outro" data-outro>
+        <div class="wrap outro-inner">
+          <h2>Take one.<br /><em>It's yours.</em></h2>
+          <p>No account, no license key, no runtime. Read it, change it, delete half of it.</p>
+          <button type="button" class="cmd cmd-hero" data-copy="npx jawdrop add scramble-text">
+            <code><i>$</i> npx jawdrop add scramble-text</code><span class="cmd-copy">Copy</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <main id="detail" data-detail-host hidden></main>
+
+    <footer class="footer wrap">
+      <span>MIT licensed. Made by <a href="https://github.com/whosdrix" rel="noreferrer">whosdrix</a>.</span>
+      <span>
+        <a href="https://github.com/whosdrix/jawdrop" rel="noreferrer">Source on GitHub</a>
+        <a href="./llms.txt">llms.txt</a>
+      </span>
+    </footer>
+
+    <div class="toast" data-toast role="status" aria-live="polite"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

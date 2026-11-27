@@ -1,0 +1,16 @@
+---
+import type { StackingCardsOptions } from './core'
+
+type Props = Omit<StackingCardsOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'div', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="stacking-cards" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { stackingCards } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="stacking-cards"]')) {
+    stackingCards(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

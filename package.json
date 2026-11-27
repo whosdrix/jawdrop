@@ -1,0 +1,43 @@
+{
+  "name": "jawdrop-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "npm run registry && vite",
+    "build": "npm run registry && vite build && npm run build -w jawdrop",
+    "preview": "vite preview",
+    "registry": "tsx scripts/build-registry.ts",
+    "size": "tsx scripts/check-size.ts",
+    "new": "tsx scripts/new-effect.ts",
+    "cards": "tsx scripts/cards.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "e2e": "playwright test",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p packages/cli"
+  },
+  "devDependencies": {
+    "@astrojs/compiler": "^4.0.0",
+    "@biomejs/biome": "^2.6.9",
+    "@playwright/test": "^1.65.1",
+    "@types/node": "^22.20.7",
+    "@types/react": "^19.3.3",
+    "@types/react-dom": "^19.3.0",
+    "esbuild": "^0.28.2",
+    "happy-dom": "^21.0.4",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "^8.4.0",
+    "vitest": "^5.1.2"
+  }
+}

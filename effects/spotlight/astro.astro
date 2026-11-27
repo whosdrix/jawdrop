@@ -1,0 +1,16 @@
+---
+import type { SpotlightOptions } from './core'
+
+type Props = Omit<SpotlightOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'div', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="spotlight" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { spotlight } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="spotlight"]')) {
+    spotlight(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

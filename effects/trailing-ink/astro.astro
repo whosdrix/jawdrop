@@ -1,0 +1,16 @@
+---
+import type { TrailingInkOptions } from './core'
+
+type Props = Omit<TrailingInkOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'div', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="trailing-ink" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { trailingInk } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="trailing-ink"]')) {
+    trailingInk(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

@@ -1,0 +1,26 @@
+{
+  "name": "Gradient sweep",
+  "category": "text",
+  "description": "A gradient slides through the letters forever. Pure CSS clipping, animated with the Web Animations API.",
+  "export": "gradientSweep",
+  "component": "GradientSweep",
+  "budget": 2048,
+  "options": {
+    "duration": {
+      "type": "number",
+      "default": 4000,
+      "min": 800,
+      "max": 10000,
+      "step": 100,
+      "label": "Duration"
+    },
+    "angle": {
+      "type": "number",
+      "default": 100,
+      "min": 0,
+      "max": 360,
+      "step": 5,
+      "label": "Angle"
+    }
+  }
+}

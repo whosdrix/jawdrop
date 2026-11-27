@@ -1,0 +1,16 @@
+---
+import type { DrawPathOptions } from './core'
+
+type Props = Omit<DrawPathOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'div', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="draw-path" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { drawPath } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="draw-path"]')) {
+    drawPath(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>
