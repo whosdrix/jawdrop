@@ -141,6 +141,19 @@ button {
     background 0.3s,
     border-color 0.3s;
 }
+/* a soft scrim so the nav reads over the aurora without blurring it */
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -28px;
+  z-index: -1;
+  background: linear-gradient(rgba(8, 9, 12, 0.6), rgba(8, 9, 12, 0));
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.nav-solid::before {
+  opacity: 0;
+}
 .nav-solid {
   background: rgba(8, 9, 12, 0.94);
   border-color: var(--line);
@@ -162,8 +175,48 @@ button {
 .nav nav {
   display: flex;
   align-items: center;
-  gap: clamp(14px, 3vw, 28px);
+  gap: clamp(10px, 2.4vw, 24px);
   font-size: 14px;
+}
+.gh {
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+}
+.btn .gh {
+  margin-right: 0.5em;
+  vertical-align: -0.2em;
+}
+.nav nav a.repo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 13px 0 9px;
+  border: 1px solid var(--line-2);
+  border-radius: 99px;
+  background: rgba(8, 9, 12, 0.55);
+  color: var(--text);
+  font: 500 12px / 1 var(--mono);
+  white-space: nowrap;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+.nav nav a.repo:hover {
+  border-color: var(--text);
+  background: rgba(8, 9, 12, 0.8);
+}
+.repo .gh {
+  width: 16px;
+  height: 16px;
+}
+.repo i {
+  font-style: normal;
+  color: var(--muted);
+}
+.repo-short {
+  display: none;
 }
 .nav nav a {
   color: var(--muted);
@@ -184,6 +237,7 @@ button {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
+  background: rgba(8, 9, 12, 0.55);
   transition:
     border-color 0.2s,
     background 0.2s;
@@ -192,20 +246,32 @@ button {
   border-color: var(--muted);
 }
 .motion-dot {
+  position: relative;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 0 rgba(91, 140, 255, 0.6);
+}
+/* the ring is its own layer and only ever changes transform and opacity */
+.motion-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.6;
   animation: pulse 1.8s ease-out infinite;
 }
 .motion[aria-pressed="true"] .motion-dot {
   background: var(--dim);
-  animation: none;
+}
+.motion[aria-pressed="true"] .motion-dot::after {
+  display: none;
 }
 @keyframes pulse {
   to {
-    box-shadow: 0 0 0 8px rgba(91, 140, 255, 0);
+    transform: scale(3);
+    opacity: 0;
   }
 }
 
@@ -274,7 +340,10 @@ html:not(.ready) .hero-inner {
   max-width: 46ch;
   font-size: clamp(16px, 1.25vw, 19px);
   line-height: 1.5;
-  color: #b9bac1;
+  color: #ccced6;
+  text-shadow:
+    0 0 10px rgba(8, 9, 12, 0.85),
+    0 0 2px rgba(8, 9, 12, 0.6);
 }
 .hero-actions {
   display: flex;
@@ -310,11 +379,15 @@ html:not(.ready) .hero-inner {
   background: #fff;
 }
 .btn-ghost {
-  border: 1px solid var(--line-2);
-  background: rgba(8, 9, 12, 0.35);
+  border: 1px solid rgba(237, 235, 229, 0.3);
+  background: rgba(8, 9, 12, 0.62);
+  transition:
+    border-color 0.2s,
+    background 0.2s;
 }
 .btn-ghost:hover {
   border-color: var(--text);
+  background: rgba(8, 9, 12, 0.82);
 }
 
 /* command pill */
@@ -375,8 +448,12 @@ html:not(.ready) .hero-inner {
   height: 52px;
   padding: 0 8px 0 20px;
   border-radius: 99px;
-  border-color: var(--line-2);
-  background: rgba(8, 9, 12, 0.5);
+  border-color: rgba(237, 235, 229, 0.24);
+  background: rgba(8, 9, 12, 0.66);
+}
+.cmd-hero:hover {
+  border-color: rgba(237, 235, 229, 0.4);
+  background: rgba(8, 9, 12, 0.82);
 }
 .cmd-hero code {
   font-size: 14px;
@@ -655,8 +732,23 @@ html:not(.ready) .hero-inner {
   color: #b9bac1;
   font-size: 18px;
 }
+.outro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 100%;
+}
 .outro .cmd-hero {
   max-width: 100%;
+}
+.outro .btn {
+  font: 500 14px / 1 var(--mono);
+  letter-spacing: 0;
+}
+.outro .outro-note {
+  font-size: 14.5px;
+  color: var(--muted);
+  max-width: none;
 }
 .footer {
   padding-block: 28px 36px;
@@ -679,7 +771,13 @@ html:not(.ready) .hero-inner {
 }
 .footer span:last-child {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+.footer-repo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 .toast {
   position: fixed;
@@ -1152,9 +1250,13 @@ html:not(.ready) .hero-inner {
   color: var(--accent-soft);
 }
 
-@media (max-width: 520px) {
-  .nav nav a[href="#effects"] {
+@media (max-width: 640px) {
+  .nav nav a[href="#effects"],
+  .repo-full {
     display: none;
+  }
+  .repo-short {
+    display: inline;
   }
 }
 

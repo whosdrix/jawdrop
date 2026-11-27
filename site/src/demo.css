@@ -246,8 +246,7 @@
   aspect-ratio: 1;
   left: -8cqw;
   top: -6cqw;
-  background: radial-gradient(circle at 35% 30%, #5b8cff, #1a2a78 55%, transparent 72%);
-  filter: blur(1.2cqw);
+  background: radial-gradient(circle at 35% 30%, #5b8cff, #1a2a78 52%, rgba(26, 42, 120, 0) 72%);
   opacity: 0.9;
 }
 .demo-orb-b {
