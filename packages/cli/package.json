@@ -1,6 +1,6 @@
 {
   "name": "jawdrop",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Add jawdrop effects to your project: copy-paste text, scroll, cursor and shader effects for React, Astro and plain HTML.",
   "license": "MIT",
   "author": "whosdrix",
