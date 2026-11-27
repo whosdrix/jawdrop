@@ -7,8 +7,13 @@
       "include-component-in-tag": false,
       "bump-minor-pre-major": true,
       "extra-files": [
-        { "type": "json", "path": "packages/cli/package.json", "jsonpath": "$.version" }
-      ]
+        {
+          "type": "json",
+          "path": "packages/cli/package.json",
+          "jsonpath": "$.version"
+        }
+      ],
+      "initial-version": "0.1.0"
     }
   }
 }
