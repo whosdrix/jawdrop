@@ -6,7 +6,15 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!**/dist", "!coverage", "!**/CHANGELOG.md", "!**/*.astro", "!**/*.html"]
+    "includes": [
+      "**",
+      "!**/dist",
+      "!coverage",
+      "!**/CHANGELOG.md",
+      "!**/*.astro",
+      "!**/*.html",
+      "!.release-please-manifest.json"
+    ]
   },
   "formatter": {
     "indentStyle": "space",
