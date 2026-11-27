@@ -1,0 +1,55 @@
+{
+  "name": "Orbit carousel",
+  "category": "scroll",
+  "description": "Cards sit on a ring in 3D that turns as you scroll or drag, fading with depth and gliding to a stop when you let go.",
+  "export": "orbitCarousel",
+  "component": "OrbitCarousel",
+  "budget": 3072,
+  "options": {
+    "turns": {
+      "type": "number",
+      "default": 1,
+      "min": 0.25,
+      "max": 3,
+      "step": 0.25,
+      "label": "Turns"
+    },
+    "distance": {
+      "type": "number",
+      "default": 2,
+      "min": 0.5,
+      "max": 5,
+      "step": 0.25,
+      "label": "Distance"
+    },
+    "radius": {
+      "type": "number",
+      "default": 1.5,
+      "min": 0.8,
+      "max": 3,
+      "step": 0.1,
+      "label": "Radius"
+    },
+    "perspective": {
+      "type": "number",
+      "default": 1100,
+      "min": 400,
+      "max": 3000,
+      "step": 50,
+      "label": "Perspective"
+    },
+    "tilt": {
+      "type": "number",
+      "default": 12,
+      "min": 0,
+      "max": 25,
+      "step": 1,
+      "label": "Tilt"
+    },
+    "drag": {
+      "type": "boolean",
+      "default": true,
+      "label": "Drag"
+    }
+  }
+}

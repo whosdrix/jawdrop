@@ -1,0 +1,57 @@
+{
+  "name": "Pixel trail",
+  "category": "cursor",
+  "description": "The surface is a grid of cells that light up under the cursor and cool down through a color trail, and a click sends a ring across it.",
+  "export": "pixelTrail",
+  "component": "PixelTrail",
+  "budget": 3072,
+  "options": {
+    "size": {
+      "type": "number",
+      "default": 18,
+      "min": 8,
+      "max": 60,
+      "step": 1,
+      "label": "Cell size"
+    },
+    "gap": {
+      "type": "number",
+      "default": 2,
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "label": "Gap"
+    },
+    "fade": {
+      "type": "number",
+      "default": 900,
+      "min": 200,
+      "max": 3000,
+      "step": 50,
+      "label": "Fade"
+    },
+    "radius": {
+      "type": "number",
+      "default": 1.6,
+      "min": 0.5,
+      "max": 5,
+      "step": 0.1,
+      "label": "Brush"
+    },
+    "color": {
+      "type": "color",
+      "default": "#c9f5ff",
+      "label": "Hot color"
+    },
+    "trailColor": {
+      "type": "color",
+      "default": "#5b3df5",
+      "label": "Trail color"
+    },
+    "idle": {
+      "type": "boolean",
+      "default": true,
+      "label": "Idle trail"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Scroll fill text",
+  "category": "scroll",
+  "description": "A paragraph that starts out dim and lights up word by word as you scroll through it, with a soft colored sweep at the reading edge.",
+  "export": "scrollFillText",
+  "component": "ScrollFillText",
+  "budget": 3072,
+  "options": {
+    "dim": {
+      "type": "number",
+      "default": 0.16,
+      "min": 0,
+      "max": 0.6,
+      "step": 0.02,
+      "label": "Dim"
+    },
+    "spread": {
+      "type": "number",
+      "default": 4,
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "label": "Spread"
+    },
+    "start": {
+      "type": "number",
+      "default": 0.85,
+      "min": 0.3,
+      "max": 1,
+      "step": 0.05,
+      "label": "Start"
+    },
+    "end": {
+      "type": "number",
+      "default": 0.45,
+      "min": 0,
+      "max": 0.9,
+      "step": 0.05,
+      "label": "End"
+    },
+    "highlight": {
+      "type": "color",
+      "default": "#7aa2ff",
+      "label": "Sweep color"
+    }
+  }
+}

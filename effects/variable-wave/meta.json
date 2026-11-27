@@ -1,0 +1,47 @@
+{
+  "name": "Variable font wave",
+  "category": "text",
+  "description": "Letters of a variable font grow heavier as the cursor gets close, and a slow wave keeps rolling through them when it is away.",
+  "export": "variableWave",
+  "component": "VariableWave",
+  "budget": 3072,
+  "options": {
+    "minWeight": {
+      "type": "number",
+      "default": 300,
+      "min": 100,
+      "max": 900,
+      "step": 10,
+      "label": "Light weight"
+    },
+    "maxWeight": {
+      "type": "number",
+      "default": 800,
+      "min": 100,
+      "max": 900,
+      "step": 10,
+      "label": "Heavy weight"
+    },
+    "radius": {
+      "type": "number",
+      "default": 1.2,
+      "min": 0.5,
+      "max": 5,
+      "step": 0.1,
+      "label": "Reach"
+    },
+    "speed": {
+      "type": "number",
+      "default": 1,
+      "min": 0.2,
+      "max": 4,
+      "step": 0.1,
+      "label": "Wave speed"
+    },
+    "idle": {
+      "type": "boolean",
+      "default": true,
+      "label": "Idle wave"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 # jawdrop
 
-> Open-source library of copy-paste web effects in plain TypeScript. Zero dependencies, each effect is one file under 3 KB gzipped. You install the source into your own project; there is no runtime package.
+> Open-source library of copy-paste web effects in plain TypeScript. Zero dependencies, each effect is one file under 4 KB gzipped, most under 2 KB. You install the source into your own project; there is no runtime package.
 
 Every effect is a function `fn(el, options)` that returns a `destroy()` function. All of them respect `prefers-reduced-motion`, pause when off-screen, and undo their DOM and style changes on destroy. React and Astro wrappers are available for each.
 
@@ -16,6 +16,10 @@ Every effect is a function `fn(el, options)` that returns a `destroy()` function
 - split-reveal: words or letters rise out of a mask, one after another, when the text scrolls into view.
 - gradient-sweep: a gradient slides through the letters on a loop.
 - marquee: an endless row that speeds up and flips direction with scroll, and eases to a stop on hover.
+- particle-text: the text is built from thousands of particles that the cursor blows away like sand before they settle back into the letters.
+- text-morph: cycles through a list of words, melting each one into the next like drops of liquid running together.
+- glitch-text: short bursts of digital glitch: slices slide sideways, the color channels split and a few characters flip, then it sits perfectly still again.
+- variable-wave: letters of a variable font grow heavier as the cursor gets close, and a slow wave keeps rolling through them when it is away.
 
 ## Backgrounds
 
@@ -23,6 +27,9 @@ Every effect is a function `fn(el, options)` that returns a `destroy()` function
 - aurora: curtains of light on a transparent WebGL canvas that sits over any background.
 - grain: a flickering film grain overlay.
 - dot-grid: a canvas grid of dots that swell, glow and spring away from the cursor.
+- metaballs: glossy blobs drift, melt into each other and pull apart, and one of them follows the cursor.
+- halftone-image: the image is printed as a breathing screen of dots, and a lens around the cursor swells them back into the full picture.
+- warp-starfield: stars drift past in deep space, then stretch into streaks of light for as long as you hold the pointer down.
 
 ## Scroll
 
@@ -30,6 +37,9 @@ Every effect is a function `fn(el, options)` that returns a `destroy()` function
 - parallax: layers move at their own speed with scroll and pointer, set with `data-depth`.
 - draw-path: SVG strokes draw themselves as they travel through the viewport.
 - horizontal-scroll: the section pins while vertical scrolling slides a row of panels sideways.
+- zoom-through: giant letters are cut out of a solid wall, and scrolling zooms into one of them until you fly through it into the section behind.
+- orbit-carousel: cards sit on a ring in 3D that turns as you scroll or drag, fading with depth and gliding to a stop when you let go.
+- scroll-fill-text: a paragraph that starts out dim and lights up word by word as you scroll through it, with a soft colored sweep at the reading edge.
 
 ## Cursor
 
@@ -37,6 +47,12 @@ Every effect is a function `fn(el, options)` that returns a `destroy()` function
 - spotlight: a soft light follows the cursor across a card and catches its border.
 - tilt-card: a card tilts in 3D toward the cursor, with a moving glare.
 - trailing-ink: the cursor leaves an ink stroke that thins out and fades.
+- fluid-cursor: a real fluid simulation: the cursor pours colored dye that swirls, curls into vortices and fades.
+- liquid-image: the image becomes the surface of a pool: the cursor leaves ripples that spread, bounce off the edges and bend the picture.
+- glass-lens: a ball of solid glass follows the cursor over the image, magnifying it, bending it at the rim and splitting the light into color.
+- chromatic-hover: move over the image and its colors tear apart and wobble like jelly, harder the faster you go, then snap back clean.
+- ripple-click: every click sends a shockwave through the picture: a ring of bent light with a color fringe that rolls out to the edges.
+- pixel-trail: the surface is a grid of cells that light up under the cursor and cool down through a color trail, and a click sends a ring across it.
 
 ## Links
 

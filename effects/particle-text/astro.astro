@@ -1,0 +1,16 @@
+---
+import type { ParticleTextOptions } from './core'
+
+type Props = Omit<ParticleTextOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'span', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="particle-text" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { particleText } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="particle-text"]')) {
+    particleText(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

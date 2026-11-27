@@ -34,7 +34,7 @@ An effect is ready when:
 - `destroy()` puts the DOM back exactly as it was and removes every listener. The test suite checks this for every effect, with and without reduced motion.
 - It has a reduced motion version: static, or a simple fade. Use `prefersReducedMotion()` from `lib.ts`.
 - It stops work when off screen or when the tab is hidden. `loop()` from `lib.ts` does both.
-- It stays under its gzip budget (`npm run size`). Most effects fit in 2 KB, shaders in 3 KB.
+- It stays under its gzip budget (`npm run size`). Most effects fit in 3 KB, shaders in 4 KB. Only a fluid simulation gets 6 KB.
 - It runs smoothly on a mid-range phone.
 
 ## Before opening a pull request

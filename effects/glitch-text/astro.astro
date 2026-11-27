@@ -1,0 +1,16 @@
+---
+import type { GlitchTextOptions } from './core'
+
+type Props = Omit<GlitchTextOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'span', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="glitch-text" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { glitchText } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="glitch-text"]')) {
+    glitchText(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

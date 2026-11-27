@@ -1,0 +1,36 @@
+{
+  "name": "Halftone image",
+  "category": "backgrounds",
+  "description": "The image is printed as a breathing screen of dots, and a lens around the cursor swells them back into the full picture.",
+  "export": "halftoneImage",
+  "component": "HalftoneImage",
+  "budget": 4096,
+  "options": {
+    "size": {
+      "type": "number",
+      "default": 9,
+      "min": 4,
+      "max": 28,
+      "step": 1,
+      "label": "Dot spacing"
+    },
+    "angle": {
+      "type": "number",
+      "default": 30,
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "label": "Screen angle"
+    },
+    "radius": {
+      "type": "number",
+      "default": 130,
+      "min": 40,
+      "max": 400,
+      "step": 10,
+      "label": "Lens radius"
+    },
+    "background": { "type": "color", "default": "#07080d", "label": "Paper" },
+    "roam": { "type": "boolean", "default": true, "label": "Lens wanders" }
+  }
+}

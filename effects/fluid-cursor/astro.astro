@@ -1,0 +1,16 @@
+---
+import type { FluidCursorOptions } from './core'
+
+type Props = Omit<FluidCursorOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'div', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="fluid-cursor" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { fluidCursor } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="fluid-cursor"]')) {
+    fluidCursor(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

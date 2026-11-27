@@ -1,0 +1,41 @@
+{
+  "name": "Warp starfield",
+  "category": "backgrounds",
+  "description": "Stars drift past in deep space, then stretch into streaks of light for as long as you hold the pointer down.",
+  "export": "warpStarfield",
+  "component": "WarpStarfield",
+  "budget": 3072,
+  "options": {
+    "density": {
+      "type": "number",
+      "default": 1,
+      "min": 0.2,
+      "max": 3,
+      "step": 0.1,
+      "label": "Density"
+    },
+    "speed": {
+      "type": "number",
+      "default": 1,
+      "min": 0.2,
+      "max": 4,
+      "step": 0.1,
+      "label": "Cruise speed"
+    },
+    "boost": {
+      "type": "number",
+      "default": 1,
+      "min": 0.3,
+      "max": 3,
+      "step": 0.1,
+      "label": "Warp boost"
+    },
+    "color": { "type": "color", "default": "#8fb8ff", "label": "Warp tint" },
+    "trigger": {
+      "type": "select",
+      "default": "hold",
+      "values": ["hold", "hover"],
+      "label": "Warp on"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "Glitch text",
+  "category": "text",
+  "description": "Short bursts of digital glitch: slices slide sideways, the color channels split and a few characters flip, then it sits perfectly still again.",
+  "export": "glitchText",
+  "component": "GlitchText",
+  "budget": 3072,
+  "options": {
+    "trigger": {
+      "type": "select",
+      "default": "both",
+      "values": ["both", "auto", "hover"],
+      "label": "Trigger"
+    },
+    "interval": {
+      "type": "number",
+      "default": 2600,
+      "min": 600,
+      "max": 8000,
+      "step": 100,
+      "label": "Interval"
+    },
+    "duration": {
+      "type": "number",
+      "default": 420,
+      "min": 100,
+      "max": 1500,
+      "step": 20,
+      "label": "Burst length"
+    },
+    "intensity": {
+      "type": "number",
+      "default": 0.5,
+      "min": 0.1,
+      "max": 1,
+      "step": 0.05,
+      "label": "Intensity"
+    },
+    "swap": {
+      "type": "boolean",
+      "default": true,
+      "label": "Swap characters"
+    },
+    "colorA": {
+      "type": "color",
+      "default": "#ff2a6d",
+      "label": "Channel A"
+    },
+    "colorB": {
+      "type": "color",
+      "default": "#05d9e8",
+      "label": "Channel B"
+    }
+  }
+}

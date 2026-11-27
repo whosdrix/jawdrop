@@ -1,0 +1,16 @@
+---
+import type { OrbitCarouselOptions } from './core'
+
+type Props = Omit<OrbitCarouselOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'div', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="orbit-carousel" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { orbitCarousel } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="orbit-carousel"]')) {
+    orbitCarousel(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

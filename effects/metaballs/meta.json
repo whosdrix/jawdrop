@@ -1,0 +1,21 @@
+{
+  "name": "Metaballs",
+  "category": "backgrounds",
+  "description": "Glossy blobs drift, melt into each other and pull apart, and one of them follows the cursor.",
+  "export": "metaballs",
+  "component": "Metaballs",
+  "budget": 4096,
+  "options": {
+    "count": { "type": "number", "default": 6, "min": 2, "max": 8, "step": 1, "label": "Blobs" },
+    "size": { "type": "number", "default": 1, "min": 0.4, "max": 2, "step": 0.1, "label": "Size" },
+    "speed": {
+      "type": "number",
+      "default": 1,
+      "min": 0.1,
+      "max": 4,
+      "step": 0.1,
+      "label": "Speed"
+    },
+    "glow": { "type": "number", "default": 0.5, "min": 0, "max": 1, "step": 0.05, "label": "Glow" }
+  }
+}

@@ -26,6 +26,12 @@ const GHOST = new Set([
   'magnetic',
   'trailing-ink',
   'parallax',
+  'particle-text',
+  'pixel-trail',
+  'fluid-cursor',
+  'liquid-image',
+  'chromatic-hover',
+  'glass-lens',
 ])
 const NEEDS_MOUSE = new Set(['magnetic', 'trailing-ink', 'tilt-card'])
 const REPLAY: Record<string, number> = { 'scramble-text': 4200, 'split-reveal': 4600 }

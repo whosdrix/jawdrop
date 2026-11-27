@@ -1,0 +1,16 @@
+---
+import type { TextMorphOptions } from './core'
+
+type Props = Omit<TextMorphOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'span', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="text-morph" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { textMorph } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="text-morph"]')) {
+    textMorph(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

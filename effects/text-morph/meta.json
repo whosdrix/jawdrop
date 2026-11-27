@@ -1,0 +1,39 @@
+{
+  "name": "Liquid text morph",
+  "category": "text",
+  "description": "Cycles through a list of words, melting each one into the next like drops of liquid running together.",
+  "export": "textMorph",
+  "component": "TextMorph",
+  "budget": 3072,
+  "options": {
+    "hold": {
+      "type": "number",
+      "default": 1600,
+      "min": 200,
+      "max": 5000,
+      "step": 100,
+      "label": "Hold"
+    },
+    "duration": {
+      "type": "number",
+      "default": 1100,
+      "min": 300,
+      "max": 4000,
+      "step": 100,
+      "label": "Morph time"
+    },
+    "blur": {
+      "type": "number",
+      "default": 0.07,
+      "min": 0.02,
+      "max": 0.2,
+      "step": 0.01,
+      "label": "Melt"
+    },
+    "accent": {
+      "type": "color",
+      "default": "#7aa2ff",
+      "label": "Liquid color"
+    }
+  }
+}

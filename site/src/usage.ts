@@ -31,6 +31,29 @@ const INNER: Record<string, string[]> = {
   magnetic: ['<span>Get started</span>'],
   spotlight: ['<h3>Pro plan</h3>', '<p>$12 a month</p>'],
   'tilt-card': ['<h3>No. 014</h3>'],
+  'particle-text': ['Made of sand'],
+  'text-morph': ['liquid'],
+  'variable-wave': ['Heavyweight'],
+  'glitch-text': ['Signal lost'],
+  'scroll-fill-text': ['Good motion tells you where to look. Every word gets its moment.'],
+  'zoom-through': ['<h2>DIVE IN</h2>', '<div>What waits on the other side</div>'],
+  'orbit-carousel': [
+    '<article>Mercury</article>',
+    '<article>Venus</article>',
+    '<article>Terra</article>',
+    '<article>Mars</article>',
+    '<article>Jove</article>',
+  ],
+  'liquid-image': ['<img src="/photo.jpg" alt="" />'],
+  'chromatic-hover': ['<img src="/photo.jpg" alt="" />'],
+  'halftone-image': ['<img src="/photo.jpg" alt="" />'],
+  'ripple-click': ['<img src="/photo.jpg" alt="" />'],
+  'glass-lens': ['<img src="/photo.jpg" alt="" />'],
+}
+
+/** Options every snippet needs even at their defaults, as JS literals. */
+const FIXED: Record<string, [string, string][]> = {
+  'text-morph': [['words', "['liquid', 'magnetic', 'electric']"]],
 }
 const FALLBACK = ['<h1>Your content</h1>']
 
@@ -39,6 +62,12 @@ const TAG: Record<string, string> = {
   'split-reveal': 'h2',
   'gradient-sweep': 'h2',
   magnetic: 'button',
+  'particle-text': 'h2',
+  'variable-wave': 'h2',
+  'glitch-text': 'h2',
+  'text-morph': 'span',
+  'scroll-fill-text': 'p',
+  'zoom-through': 'section',
 }
 
 function changed(effect: Effect, values: Values): [string, string | number | boolean][] {
@@ -52,11 +81,14 @@ const indent = (lines: string[], n: number) => lines.map((l) => ' '.repeat(n) + 
 export function usage(effect: Effect, flavour: Flavour, values: Values): string {
   const opts = changed(effect, values)
   const inner = INNER[effect.slug] ?? FALLBACK
-  const props = opts
-    .map(([k, v]) =>
-      typeof v === 'string' ? ` ${k}="${v}"` : v === true ? ` ${k}` : ` ${k}={${v}}`,
-    )
-    .join('')
+  const fixed = FIXED[effect.slug] ?? []
+  const props =
+    fixed.map(([k, v]) => ` ${k}={${v}}`).join('') +
+    opts
+      .map(([k, v]) =>
+        typeof v === 'string' ? ` ${k}="${v}"` : v === true ? ` ${k}` : ` ${k}={${v}}`,
+      )
+      .join('')
 
   if (flavour === 'react') {
     return [
@@ -83,9 +115,11 @@ export function usage(effect: Effect, flavour: Flavour, values: Values): string 
     ].join('\n')
   }
   const tag = TAG[effect.slug] ?? 'div'
-  const object = opts.length
-    ? `, { ${opts.map(([k, v]) => `${k}: ${typeof v === 'string' ? `'${v}'` : v}`).join(', ')} }`
-    : ''
+  const pairs = [
+    ...fixed.map(([k, v]) => `${k}: ${v}`),
+    ...opts.map(([k, v]) => `${k}: ${typeof v === 'string' ? `'${v}'` : v}`),
+  ]
+  const object = pairs.length ? `, { ${pairs.join(', ')} }` : ''
   return [
     `<${tag} id="fx">`,
     ...indent(inner, 2),

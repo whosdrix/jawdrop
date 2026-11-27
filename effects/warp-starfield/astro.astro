@@ -1,0 +1,16 @@
+---
+import type { WarpStarfieldOptions } from './core'
+
+type Props = Omit<WarpStarfieldOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'div', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="warp-starfield" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { warpStarfield } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="warp-starfield"]')) {
+    warpStarfield(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>

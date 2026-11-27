@@ -1,0 +1,16 @@
+---
+import type { ScrollFillTextOptions } from './core'
+
+type Props = Omit<ScrollFillTextOptions, 'root'> & { as?: string; class?: string }
+const { as: Tag = 'p', class: className, ...options } = Astro.props
+---
+
+<Tag class={className} data-jawdrop="scroll-fill-text" data-options={JSON.stringify(options)}><slot /></Tag>
+
+<script>
+  import { scrollFillText } from './core'
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-jawdrop="scroll-fill-text"]')) {
+    scrollFillText(el, JSON.parse(el.dataset.options ?? '{}'))
+  }
+</script>
