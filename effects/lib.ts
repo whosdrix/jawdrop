@@ -157,13 +157,17 @@ export function backdrop<T extends HTMLElement>(el: HTMLElement, layer: T): Dest
   }
 }
 
-/** Keeps a canvas sized to its parent at the device pixel ratio (capped at 2). */
+/**
+ * Keeps a canvas sized to its parent at the device pixel ratio, capped at `maxRatio` pixels per
+ * CSS pixel. Soft shaders look the same at a fraction of the pixels, so they pass a lower cap.
+ */
 export function fitCanvas(
   canvas: HTMLCanvasElement,
   onResize?: (w: number, h: number, dpr: number) => void,
+  maxRatio = 2,
 ): Destroy {
   const resize = () => {
-    const dpr = Math.min(devicePixelRatio || 1, 2)
+    const dpr = Math.min(devicePixelRatio || 1, maxRatio)
     const { width, height } = canvas.getBoundingClientRect()
     canvas.width = Math.max(1, Math.round(width * dpr))
     canvas.height = Math.max(1, Math.round(height * dpr))

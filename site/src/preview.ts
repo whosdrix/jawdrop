@@ -1,10 +1,15 @@
 import { attach, type Destroy, defaults, type Effect, type Values } from './effects'
 import { isCoarse, isReduced } from './motion'
 
-/** One shared frame loop for everything the site animates on behalf of a preview. */
+/**
+ * One shared frame loop for everything the site animates on behalf of a preview. Stage boxes are
+ * all measured up front, before any ticker writes, so a frame never forces more than one layout.
+ */
 const tickers = new Set<(now: number) => void>()
+const measured = new Map<HTMLElement, DOMRect>()
 let raf = 0
 const tick = (now: number) => {
+  for (const el of measured.keys()) measured.set(el, el.getBoundingClientRect())
   for (const fn of tickers) fn(now)
   raf = tickers.size ? requestAnimationFrame(tick) : 0
 }
@@ -61,11 +66,11 @@ export function hintFor(effect: Effect): string {
 }
 
 /** Scrolls a demo's own scroll container back and forth until someone takes over. */
-function autoScroll(root: HTMLElement, handOver: boolean): Destroy {
+function autoScroll(root: HTMLElement, handOver: boolean, visible: () => boolean): Destroy {
   let start = 0
   let stopped = false
   const stop = addTicker((now) => {
-    if (stopped) return
+    if (stopped || !visible()) return
     const max = root.scrollHeight - root.clientHeight
     if (max <= 0) return
     if (!start) start = now + 500
@@ -88,7 +93,12 @@ function autoScroll(root: HTMLElement, handOver: boolean): Destroy {
 }
 
 /** A fake pointer that wanders over the demo so cursor effects are never sitting still. */
-function ghostPointer(stage: HTMLElement, fx: HTMLElement, slug: string): Destroy {
+function ghostPointer(
+  stage: HTMLElement,
+  fx: HTMLElement,
+  slug: string,
+  visible: () => boolean,
+): Destroy {
   const dot = document.createElement('i')
   dot.className = 'ghost'
   dot.setAttribute('aria-hidden', 'true')
@@ -108,16 +118,26 @@ function ghostPointer(stage: HTMLElement, fx: HTMLElement, slug: string): Destro
       }),
     )
 
+  let geo = { x: 0, y: 0, w: 0, h: 0 }
+  const measure = () => {
+    geo = { x: fx.offsetLeft, y: fx.offsetTop, w: fx.offsetWidth, h: fx.offsetHeight }
+  }
+  measure()
+  const ro = new ResizeObserver(measure)
+  ro.observe(fx)
+  ro.observe(stage)
+  measured.set(stage, stage.getBoundingClientRect())
+
   const stop = addTicker((now) => {
-    if (real || !fx.isConnected) return
+    if (real || !visible()) return
+    const box = measured.get(stage)
+    if (!box) return
     if (!t0) t0 = now
     const t = (now - t0) / 1000 + seed
-    const box = stage.getBoundingClientRect()
-    if (box.bottom < 0 || box.top > innerHeight) return
-    const cx = fx.offsetLeft + fx.offsetWidth / 2
-    const cy = fx.offsetTop + fx.offsetHeight / 2
-    const ax = Math.min((fx.offsetWidth * spread) / 2, box.width / 2 - 14)
-    const ay = Math.min((fx.offsetHeight * spread) / 2, box.height / 2 - 14)
+    const cx = geo.x + geo.w / 2
+    const cy = geo.y + geo.h / 2
+    const ax = Math.min((geo.w * spread) / 2, box.width / 2 - 14)
+    const ay = Math.min((geo.h * spread) / 2, box.height / 2 - 14)
     const x = cx + ax * Math.sin(t * 0.83)
     const y = cy + ay * Math.sin(t * 1.27 + 1.1)
     dot.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`
@@ -139,6 +159,8 @@ function ghostPointer(stage: HTMLElement, fx: HTMLElement, slug: string): Destro
   stage.addEventListener('pointerleave', leave)
   return () => {
     stop()
+    ro.disconnect()
+    measured.delete(stage)
     stage.removeEventListener('pointerenter', enter)
     stage.removeEventListener('pointerleave', leave)
     dot.remove()
@@ -171,14 +193,19 @@ export function createPreview(stage: HTMLElement, effect: Effect, mode: PreviewM
       cleanup.push(attach(effect.slug, fx, options))
 
       if (isReduced()) return
-      if (root) cleanup.push(autoScroll(root, mode === 'detail'))
-      if (GHOST.has(effect.slug)) cleanup.push(ghostPointer(stage, fx, effect.slug))
+      let onScreen = true
+      const io = new IntersectionObserver((entries) => {
+        onScreen = entries.some((e) => e.isIntersecting)
+      })
+      io.observe(stage)
+      cleanup.push(() => io.disconnect())
+      const visible = () => onScreen && !document.hidden
+      if (root) cleanup.push(autoScroll(root, mode === 'detail', visible))
+      if (GHOST.has(effect.slug)) cleanup.push(ghostPointer(stage, fx, effect.slug, visible))
       const every = REPLAY[effect.slug]
       if (mode === 'card' && every) {
         const timer = setInterval(() => {
-          if (document.hidden) return
-          const box = stage.getBoundingClientRect()
-          if (box.bottom > 0 && box.top < innerHeight) preview.remount()
+          if (visible()) preview.remount()
         }, every)
         cleanup.push(() => clearInterval(timer))
       }

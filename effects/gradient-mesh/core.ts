@@ -17,6 +17,11 @@ export interface GradientMeshOptions {
   speed?: number
   /** Amount of film grain, 0 to 0.2. Hides banding on large screens. */
   grain?: number
+  /**
+   * Pixels rendered per CSS pixel, up to the screen's density. The default of 1 skips the extra
+   * pixels of high-density screens, which a soft gradient does not need.
+   */
+  resolution?: number
 }
 
 const FRAG = `
@@ -35,7 +40,12 @@ void main(){
 }`
 
 export function gradientMesh(el: HTMLElement, options: GradientMeshOptions = {}): Destroy {
-  const { colors = ['#0b1026', '#3b2bff', '#00c2ff', '#ff4fd8'], speed = 1, grain = 0.06 } = options
+  const {
+    colors = ['#0b1026', '#3b2bff', '#00c2ff', '#ff4fd8'],
+    speed = 1,
+    grain = 0.06,
+    resolution = 1,
+  } = options
   const canvas = document.createElement('canvas')
   const removeLayer = backdrop(el, canvas)
   const ctx = createGL(canvas, FRAG)
@@ -52,11 +62,15 @@ export function gradientMesh(el: HTMLElement, options: GradientMeshOptions = {})
     gl.uniform1f(uniform('t'), time * speed)
     gl.drawArrays(gl.TRIANGLES, 0, 3)
   }
-  const stopFit = fitCanvas(canvas, () => {
-    gl.viewport(0, 0, canvas.width, canvas.height)
-    gl.uniform2f(uniform('r'), canvas.width, canvas.height)
-    draw(8000)
-  })
+  const stopFit = fitCanvas(
+    canvas,
+    () => {
+      gl.viewport(0, 0, canvas.width, canvas.height)
+      gl.uniform2f(uniform('r'), canvas.width, canvas.height)
+      draw(8000)
+    },
+    resolution,
+  )
   const stop = prefersReducedMotion() ? () => {} : loop(el, (time) => draw(time + 8000))
   return all(removeLayer, stopFit, stop, () => releaseGL(gl))
 }

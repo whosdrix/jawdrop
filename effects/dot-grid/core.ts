@@ -88,7 +88,10 @@ export function dotGrid(el: HTMLElement, options: DotGridOptions = {}): Destroy 
   const stopFit = fitCanvas(canvas, build)
   if (prefersReducedMotion()) return all(remove, stopFit)
 
+  let settled = false
   const step = () => {
+    if (settled) return
+    let motion = 0
     for (const d of dots) {
       const dx = d.ox - pointer.x
       const dy = d.oy - pointer.y
@@ -101,17 +104,21 @@ export function dotGrid(el: HTMLElement, options: DotGridOptions = {}): Destroy 
       d.x += d.vx
       d.y += d.vy
       d.heat += (f - d.heat) * 0.15
+      motion += Math.abs(d.vx) + Math.abs(d.vy) + Math.abs(f - d.heat)
     }
     draw()
+    settled = pointer.x < -999 && motion < 0.01
   }
 
   const move = (e: PointerEvent) => {
     const rect = canvas.getBoundingClientRect()
     pointer.x = e.clientX - rect.left
     pointer.y = e.clientY - rect.top
+    settled = false
   }
   const leave = () => {
     pointer.x = pointer.y = -9999
+    settled = false
   }
 
   return all(

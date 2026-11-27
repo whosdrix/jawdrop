@@ -64,19 +64,38 @@ for (const el of gallery.querySelectorAll<HTMLElement>('.card')) {
   if (effect) previews.set(el, createPreview($('[data-stage]', el), effect, 'card'))
 }
 
-// Mount a preview a little before it scrolls in, destroy it once it is well gone.
-// Keeps the number of live canvases (and WebGL contexts) small.
-const cardObserver = new IntersectionObserver(
+// Mount a preview a little before it scrolls in and destroy it only once it is well gone, so
+// scrolling back and forth does not keep rebuilding canvases and WebGL contexts.
+const mountObserver = new IntersectionObserver(
   (entries) => {
     for (const entry of entries) {
-      const preview = previews.get(entry.target)
-      if (!preview) continue
-      if (entry.isIntersecting && !home.hidden) preview.mount()
-      else preview.destroy()
+      if (entry.isIntersecting && !home.hidden) previews.get(entry.target)?.mount()
     }
   },
-  { rootMargin: '30% 0px' },
+  { rootMargin: '25% 0px' },
 )
+const unmountObserver = new IntersectionObserver(
+  (entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) previews.get(entry.target)?.destroy()
+    }
+  },
+  { rootMargin: '120% 0px' },
+)
+const cardObserver = {
+  observe(el: Element) {
+    mountObserver.observe(el)
+    unmountObserver.observe(el)
+  },
+  unobserve(el: Element) {
+    mountObserver.unobserve(el)
+    unmountObserver.unobserve(el)
+  },
+  disconnect() {
+    mountObserver.disconnect()
+    unmountObserver.disconnect()
+  },
+}
 
 gallery.addEventListener('click', (e) => {
   const target = e.target as HTMLElement

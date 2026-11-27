@@ -68,8 +68,16 @@ export function marquee(el: HTMLElement, options: MarqueeOptions = {}): Destroy 
     )
   }
 
+  let width = first.offsetWidth
+  const ro =
+    typeof ResizeObserver === 'undefined'
+      ? null
+      : new ResizeObserver(() => {
+          width = first.offsetWidth
+        })
+  ro?.observe(first)
+
   const stop = loop(el, (_, dt) => {
-    const width = first.offsetWidth
     if (!width) return
     hoverFactor += ((hovered ? 0 : 1) - hoverFactor) * 0.08
     boost *= 0.92
@@ -78,5 +86,5 @@ export function marquee(el: HTMLElement, options: MarqueeOptions = {}): Destroy 
     track.style.transform = `translate3d(${-x}px,0,0)`
   })
 
-  return all(restore, stop, ...offs)
+  return all(restore, stop, () => ro?.disconnect(), ...offs)
 }

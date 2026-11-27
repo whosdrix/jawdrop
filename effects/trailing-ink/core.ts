@@ -31,6 +31,7 @@ export function trailingInk(el: HTMLElement, options: TrailingInkOptions = {}): 
 
   let dpr = 1
   let now = 0
+  let dirty = false
   const points: { x: number; y: number; t: number }[] = []
   const stopFit = fitCanvas(canvas, (_w, _h, ratio) => {
     dpr = ratio
@@ -44,9 +45,11 @@ export function trailingInk(el: HTMLElement, options: TrailingInkOptions = {}): 
   const draw = (time: number) => {
     now = time
     while (points.length && now - (points[0] as { t: number }).t > life) points.shift()
+    if (!dirty && points.length < 2) return
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    if (points.length < 2) return
+    dirty = points.length >= 2
+    if (!dirty) return
     ctx.lineCap = 'round'
     ctx.lineJoin = 'round'
     ctx.strokeStyle = color

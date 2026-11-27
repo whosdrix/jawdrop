@@ -17,6 +17,11 @@ export interface AuroraOptions {
   speed?: number
   /** Brightness of the light, 0.2 to 2. */
   intensity?: number
+  /**
+   * Pixels rendered per CSS pixel, up to the screen's density. The light is soft, so the default
+   * of 0.5 looks the same as full resolution for a fraction of the GPU work.
+   */
+  resolution?: number
 }
 
 const FRAG = `
@@ -24,7 +29,7 @@ uniform vec2 r;uniform float t,k;uniform vec3 c0,c1,c2;
 float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
   return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
-float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*n(p);p*=2.03;a*=.5;}return v;}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<3;i++){v+=a*n(p);p*=2.03;a*=.5;}return v;}
 vec3 band(vec2 uv,float s,float o,vec3 c){
   float y=.38+o*.09+.22*(fbm(vec2(uv.x*1.6+o*3.1,s*.6+o))-.5);
   float d=uv.y-y;
@@ -41,7 +46,12 @@ void main(){
 }`
 
 export function aurora(el: HTMLElement, options: AuroraOptions = {}): Destroy {
-  const { colors = ['#3b82f6', '#22d3a6', '#a855f7'], speed = 1, intensity = 1 } = options
+  const {
+    colors = ['#3b82f6', '#22d3a6', '#a855f7'],
+    speed = 1,
+    intensity = 1,
+    resolution = 0.5,
+  } = options
   const canvas = document.createElement('canvas')
   const removeLayer = backdrop(el, canvas)
   const ctx = createGL(canvas, FRAG)
@@ -58,11 +68,15 @@ export function aurora(el: HTMLElement, options: AuroraOptions = {}): Destroy {
     gl.uniform1f(uniform('t'), time * speed)
     gl.drawArrays(gl.TRIANGLES, 0, 3)
   }
-  const stopFit = fitCanvas(canvas, () => {
-    gl.viewport(0, 0, canvas.width, canvas.height)
-    gl.uniform2f(uniform('r'), canvas.width, canvas.height)
-    draw(20000)
-  })
+  const stopFit = fitCanvas(
+    canvas,
+    () => {
+      gl.viewport(0, 0, canvas.width, canvas.height)
+      gl.uniform2f(uniform('r'), canvas.width, canvas.height)
+      draw(20000)
+    },
+    resolution,
+  )
   const stop = prefersReducedMotion() ? () => {} : loop(el, (time) => draw(time + 20000))
   return all(removeLayer, stopFit, stop, () => releaseGL(gl))
 }
